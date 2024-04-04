@@ -13,9 +13,12 @@ client = Socrata("data.ny.gov", None)
 
 # First 2000 results, returned as JSON from API / converted to Python list of
 # dictionaries by sodapy.
-results = client.get("wujg-7c2s", limit=2000)
+results = client.get("wujg-7c2s", limit = 10_000_000)
 
 # Convert to pandas DataFrame
 results_df = pd.DataFrame.from_records(results)
 
-display(results_df)
+#filter only rows that are from February 9th, 2023
+# results_df = results_df[results_df.transit_timestamp.str.startswith("")]
+
+results_df.to_csv("subway_data.csv", index=False, sep = "\t")
