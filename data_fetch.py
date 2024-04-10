@@ -1,24 +1,23 @@
+import requests
 import pandas as pd
-from sodapy import Socrata
 
-# Unauthenticated client only works with public data sets. Note 'None'
-# in place of application token, and no username or password:
-client = Socrata("data.ny.gov", None)
+#trying a different approach, not using SODA API but just using simple requests
 
-# Example authenticated client (needed for non-public datasets):
-# client = Socrata(data.ny.gov,
-#                  MyAppToken,
-#                  username="user@example.com",
-#                  password="AFakePassword")
+url = "https://data.ny.gov/resource/wujg-7c2s.json"
 
-# First 2000 results, returned as JSON from API / converted to Python list of
-# dictionaries by sodapy.
-results = client.get("wujg-7c2s", limit = 10_000_000)
+#SQL parameters
 
-# Convert to pandas DataFrame
-results_df = pd.DataFrame.from_records(results)
+params = {
+    "$where": "transit_timestamp >= '2023-03-01T00:00:00' AND transit_timestamp < '2023-03-02T00:00:00'",
+    "$limit": 500000 # set this arbitrarily high
+}
 
-#filter only rows that are from February 9th, 2023
-# results_df = results_df[results_df.transit_timestamp.str.startswith("")]
+response = requests.get(url, params=params)
 
-results_df.to_csv("subway_data.csv", index=False, sep = "\t")
+
+if response.status_code == 200:
+    data = pd.DataFrame(response.json())
+    data.to_csv("subway_data.csv")
+else:
+    print(f"Error: {response.status_code} - {response.text}")
+
