@@ -17,7 +17,7 @@ response = requests.get(url, params=params)
 
 if response.status_code == 200:
     data = pd.DataFrame(response.json())
-    data.to_csv("subway_data.csv")
+    data.to_csv("data/subway_data.csv")
 else:
     print(f"Error: {response.status_code} - {response.text}")
 
