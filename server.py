@@ -12,10 +12,14 @@ def create_app(config=None):
     # Definition of the routes. Put them into their own file. See also
     # Flask Blueprints: http://flask.pocoo.org/docs/latest/blueprints
     @app.route("/")
-    def hello_world():
-        return "Hello World"
+    def home():
+        return  flask.render_template("index.html")
+    
+    @app.route("/index.html")
+    def index():
+        return  flask.render_template("index.html")
 
-    @app.route("/about")
+    @app.route("/about.html")
     def about():
         return flask.render_template('about.html')
 
