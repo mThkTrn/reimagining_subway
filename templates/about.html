@@ -12,7 +12,9 @@
     {% include "navbar.html" %}
     <h2>Prototyping</h2>
     <p class="body-text">The project began with a lo-fi prototype of the micro pages (borough data) and the macro page (citywide data)</p>
-    <img src="images/macro_image." alt="">
+    <img src="images/macro_image.png" width = "50vw">
+    <img src="images/micro_image.png" width = "50vw">
+
     <h2>Data Cleansing Pipeline</h2>
     <p class="bodytext">Data used was published through the MTA's Open Data Program. In particular, the <a href = 'https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data'>"MTA Subway Hourly Ridership: Beginning February 2022"</a> was used.
                         As the dataset was very large, python's requests library was used to communicate with the API and obtain data for one day: March 1st, 2023. The data was saved as a CSV. The CSV was then opened using pandas, reformatted so it would be easier to work with and saved in JSON format. In particular, the resulting JSON object containsnested dictionaries of station and time.</p>
