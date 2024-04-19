@@ -10,12 +10,16 @@
 </head>
 <body>
     {% include "navbar.html" %}
+    <h2>Description</h2>
+    
+    <p class="description">The subway is integral to New York City, shuttling over 3 million people every day. However, it isn't fully equitable. Often, the communities most in need have the least access to this vital public service.<br>
+        This project analyzes the New York City subway system, identifying inequities and imagining a more equitable and efficient subway system. Defining some ky terms, the New York City Subway refers to the rail transit system connecting NYC, a line on the subway is a path followed by trains, such as the 1, 2, 3, A, B, C, etc.</p>
     <h2>Prototyping</h2>
-    <p class="body-text">The project began with a lo-fi prototype of the micro pages (borough data) and the macro page (citywide data).</p>
-    <img src="images/macro_image.png" width = "50vw">
-    <img src="images/micro_image.png" width = "50vw">
+    <p class="body-text">The project began with a lo-fi prototype of the micro pages (borough data) and the macro page (citywide data).  To make the numbers more meaningful, information was overlayed on a map which features subway lines, so discrepancies in connectivity and usage could be emphasized. Additonally, it made it easier to glean information from the map as opposed to having to sift through charts.</p>
+    <img src="images/macro_image.png">
+    <img src="images/micro_image.png">
 <h2>Refining</h2>
-<p class="bodytext">The above prototype was later revised to allow for a clearer and more informative glimpse into the subway system, where each micro page relfected a borough rather than a station. To make the numbers more meaningful, information was overlayed on a map whichi features subway lines, so discrepancies in connectivity and usage could be emphasized.</p>
+<p class="bodytext">The above prototype was later revised to allow for a clearer and more informative glimpse into the subway system, where each micro page relfected a borough rather than a station. This was due to some feedback, which questioned whether a micro page for each station was informative or useful</p>
     <h2>Data Cleansing Pipeline</h2>
     <p class="bodytext">Data used was published through the MTA's Open Data Program. In particular, the <a href = 'https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data'>"MTA Subway Hourly Ridership: Beginning February 2022"</a> was used.
                         As the dataset was very large, python's requests library was used to communicate with the API and obtain data for one day: March 1st, 2023. The data was saved as a CSV. The CSV was then opened using pandas, reformatted so it would be easier to work with and saved in JSON format. In particular, the resulting JSON object containsnested dictionaries of station and time.</p>
