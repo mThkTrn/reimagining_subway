@@ -5,7 +5,7 @@ from flask import Flask
 
 
 def create_app(config=None):
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='', static_folder="static")
     app.config.update(dict(DEBUG=True))
     app.config.update(config or {})
 
@@ -29,8 +29,9 @@ def create_app(config=None):
     def about():
         return flask.render_template('about.html', boroughs = boroughs)
     
-    @app.route("/borough_data/<borough>")
-    def subway_data(borough):
+    @app.route("/borough_data")
+    def subway_data():
+        borough = flask.request.args.get('borough')
         return flask.render_template('borough_data.html', borough = borough, boroughs = boroughs)
     return app
 

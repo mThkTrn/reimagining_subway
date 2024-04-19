@@ -7,10 +7,13 @@
     <title>Borough Data | {{borough}}</title>
 </head>
 <body>
-<h1>Borough Data {{Borough}}</h1>
+{% include "navbar.html" %}
+<h1>Borough Data: {{borough}}</h1>
+<h3>Lines Serving {{borough}}: </h3>
 <h2>Commuters (By the hour)</h2>
-<div class="placeholder" width = "90vw" height = "70vh"></div>
-
+{% include "micro.html" %}
+<h2>Map</h2>
+{% include "micro2.html" %}
 {% include "footer.html" %}
 </body>
 </html>

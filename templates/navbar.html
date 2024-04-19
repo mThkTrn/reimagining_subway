@@ -14,7 +14,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               {% for region in boroughs %}
-              <a class="dropdown-item" href="/borough_data/{{region}}">{{region}}</a>
+              <a class="dropdown-item" href="/borough_data?borough={{region}}">{{region}}</a>
               {% endfor %}
             </div>
           </li>
