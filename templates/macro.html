@@ -1,3 +1,16 @@
-<svg width = "40vw" height = "40vw">
+<style>
+    #Manhattan:hover{
+        fill: #F07568;
+    }
+</style>
+
+<svg width = "500px" height = "500px">
     {% include "svg_graphics/NYC_boroughs.svg" %}
+    {% for circle in circles_list%}
+    <circle cx = "{{circle[0]}}" cy = "{{circle[1]}}" r = {{circle[2]}} />
+    {% endfor %}
 </svg>
+
+<script>
+    document.getElementById("Manhattan").setAttribute("fill", "#F07568")
+</script>

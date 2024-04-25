@@ -11,8 +11,9 @@ for ind in df.index:
 
     if name not in ddict.keys():
         ddict[name] = {}
+        ddict[name]["times"] = {}
     if time not in ddict[name].keys():
-        ddict[name][time] = {}
+        ddict[name]["times"][time] = {}
     
     station_keys = ["station_complex_id", "borough", "latitude", "longitude", "georeference"]
     for i in station_keys:
@@ -21,7 +22,7 @@ for ind in df.index:
     ride_keys = ["transit_mode","payment_method","fare_class_category","ridership","transfers"]
 
     for i in ride_keys:
-        ddict[name][time][i] = str(df[i][ind])
+        ddict[name]["times"][time][i] = str(df[i][ind])
 
 print(ddict)
 
