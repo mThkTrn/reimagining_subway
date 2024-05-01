@@ -24,13 +24,28 @@ def create_app(config=None):
     for station in data.keys():
         boroughs.add(data[station]["borough"])
 
+    borough_data = {}
+    for borough in boroughs:
+        borough_data[borough] = {}
+        borough_data[borough]["total"] = 0
+        borough_data[borough]["times"] = {}
+        for i in range(24):
+            borough_data[borough]["times"][f"{i:02}:00:00.000"] = 0
+    
+    for station in data.keys():
+        for time in data[station]["times"]:
+            borough_data[data[station]["borough"]]["times"][time]+=float(data[station]["times"][time]["ridership"])
+
+    for borough in borough_data: borough_data[borough]["total"] = sum([borough_data[borough]["times"][time] for time in borough_data[borough]["times"]])
     circles_list = []
+    circle_scale = 0.3
     for station in data.keys():
         count = 0
         pos = map_coords(nyc_svg_bottom_left, nyc_svg_top_right, (0,0), (500,500), (float(data[station]["latitude"]), float(data[station]["longitude"])))
         for time in data[station]["times"]:
-            count += float(data[station]["times"][time]["ridership"])
-        pos.append(math.sqrt(count)*0.1)
+            if time == "07:00:00.000" or time == "06:00:00.000" or time == "08:00:00.000":
+                count += (float(data[station]["times"][time]["ridership"]) - float(data[station]["times"][time]["transfers"]))
+        pos.append(math.sqrt(count)*circle_scale)
         circles_list.append(pos)
     # Definition of the routes. Put them into their own file. See also
     # Flask Blueprints: http://flask.pocoo.org/docs/latest/blueprints
@@ -49,7 +64,7 @@ def create_app(config=None):
     @app.route("/borough_data")
     def subway_data():
         borough = flask.request.args.get('borough')
-        return flask.render_template('borough_data.html', borough = borough, boroughs = boroughs)
+        return flask.render_template('borough_data.html', borough = borough, boroughs = boroughs, data = data, borough_data = borough_data)
     return app
 
 
