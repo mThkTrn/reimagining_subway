@@ -9,11 +9,10 @@
 <body>
 {% include "navbar.html" %}
 <h1>Borough Data: {{borough}}</h1>
-<h3>Lines Serving {{borough}}: </h3>
-<h2>Commuters (By the hour)</h2>
+<h3>Lines Serving {{borough}}: {{" ".join(borough_data[borough]["lines"])}}</h3>
 {% include "micro.html" %}
-<h2>Map</h2>
+<!-- <h2>Map</h2>
 {% include "micro2.html" %}
-{% include "footer.html" %}
+{% include "footer.html" %} -->
 </body>
 </html>

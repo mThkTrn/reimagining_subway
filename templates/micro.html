@@ -1,9 +1,21 @@
 <svg width = "1000px" height = "500px">
-    <text x = "250" y = "250" text-anchor = "middle">micro: insert infographic here</text>
+    <text x="30" y="250" style="writing-mode: tb;" text-anchor = "middle">
+        Ridership (# of people)
+    </text>
+    <text x="500" y="490" text-anchor = "middle">
+        Time of Day
+    </text>
+    <text x="500" y="30" text-anchor = "middle" font-size = "20">
+        Ridership by Time of Day
+    </text>
     <line x1 = "100" y1 = "450" x2 = "930" y2 = "450" stroke = "black"/>
+    <line x1 = "100" y1 = "450" x2 = "100" y2 = "50" stroke = "black"/>
+    {% for i in range(450, 50, -100) %}
+        <text text-anchor = "end" x = "95" y = "{{i}}" font-size = "10">{{(450-i)*100}}</text>
+    {%endfor%}
     {% for i in range(24)%}
 
-        <text text-anchor = "left" x = "{{100 + (800/23)*i}}" y = "460" font-size = "10">{{i}}:00</text>
-        <rect x = "{{100 + (800/23)*i}}" y = "450" width = "20" height = "{{borough_data[borough]['times'][f'{i:02}:00:00.000']}}"/>
+        <text text-anchor = "left" x = "{{100 + (800/23)*i + 10}}" y = "460" font-size = "10">{{i}}:00</text>
+        <rect x = "{{100 + (800/23)*i + 10}}" y = "{{ 450 - (borough_data[borough]['times'][i])/100 }}" width = "20" height = "{{(borough_data[borough]['times'][i])/100}}"/>
     {%endfor%}
 </svg>

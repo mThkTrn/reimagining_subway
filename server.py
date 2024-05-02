@@ -3,11 +3,11 @@ import json
 import flask
 from flask import Flask
 import math
-
+import re
 def map_coords(orig_p0, orig_p1, map_p0, map_p1, coords):
-    print(f"X: ({coords[0]} - {orig_p0[0]}) * ({map_p1[0]}-{map_p0[0]})/({orig_p1[0]}-{orig_p0[0]}) + {map_p0[0]}")
-    print(f"Y: ({coords[1]} - {orig_p0[1]}) * ({map_p1[1]}-{map_p0[1]})/({orig_p1[1]}-{orig_p0[1]}) + {map_p0[0]}")
-    print([(coords[0] - orig_p0[0]) * (map_p1[0]-map_p0[0])/(orig_p1[0]-orig_p0[0]) + map_p0[0],(coords[1] - orig_p0[1]) * (map_p1[1]-map_p0[1])/(orig_p1[1]-orig_p0[1]) + map_p0[1]])
+    # print(f"X: ({coords[0]} - {orig_p0[0]}) * ({map_p1[0]}-{map_p0[0]})/({orig_p1[0]}-{orig_p0[0]}) + {map_p0[0]}")
+    # print(f"Y: ({coords[1]} - {orig_p0[1]}) * ({map_p1[1]}-{map_p0[1]})/({orig_p1[1]}-{orig_p0[1]}) + {map_p0[0]}")
+    # print([(coords[0] - orig_p0[0]) * (map_p1[0]-map_p0[0])/(orig_p1[0]-orig_p0[0]) + map_p0[0],(coords[1] - orig_p0[1]) * (map_p1[1]-map_p0[1])/(orig_p1[1]-orig_p0[1]) + map_p0[1]])
     return [(coords[1] - orig_p0[1]) * (map_p1[1]-map_p0[1])/(orig_p1[1]-orig_p0[1]) + map_p0[1] + 5, 500-((coords[0] - orig_p0[0]) * (map_p1[0]-map_p0[0])/(orig_p1[0]-orig_p0[0]) + map_p0[0])]
 
 
@@ -21,22 +21,32 @@ def create_app(config=None):
 
     boroughs = set()
     data = json.load(open("data/data.json"))
+    linedata = json.load(open("data/subway_station_lines.json"))
     for station in data.keys():
         boroughs.add(data[station]["borough"])
 
     borough_data = {}
     for borough in boroughs:
         borough_data[borough] = {}
+        borough_data[borough]["lines"] = set()
         borough_data[borough]["total"] = 0
         borough_data[borough]["times"] = {}
         for i in range(24):
-            borough_data[borough]["times"][f"{i:02}:00:00.000"] = 0
+            borough_data[borough]["times"] = [0]*24
     
     for station in data.keys():
-        for time in data[station]["times"]:
-            borough_data[data[station]["borough"]]["times"][time]+=float(data[station]["times"][time]["ridership"])
-
-    for borough in borough_data: borough_data[borough]["total"] = sum([borough_data[borough]["times"][time] for time in borough_data[borough]["times"]])
+        for i in re.findall(r'\(.*?\)', station):
+            i = i[1:-1].split(",")
+            for elem in i:
+                if len(elem) == 1:
+                    borough_data[data[station]["borough"]]["lines"].update(elem)
+            print(i, borough_data[data[station]["borough"]]["lines"])
+        for time in range(24):
+            try:
+                borough_data[data[station]["borough"]]["times"][time]+=float(data[station]["times"][f"{time:02}:00:00.000"]["ridership"])
+            except KeyError:
+                pass
+    for borough in borough_data: borough_data[borough]["total"] = sum(borough_data[borough]["times"])
     circles_list = []
     circle_scale = 0.3
     for station in data.keys():
