@@ -21,8 +21,14 @@
 <h2>Refining</h2>
 <p class="bodytext">The above prototype was later revised to allow for a clearer and more informative glimpse into the subway system, where each micro page relfected a borough rather than a station. This was due to some feedback, which questioned whether a micro page for each station was informative or useful</p>
     <h2>Data Cleansing Pipeline</h2>
-    <p class="bodytext">Data used was published through the MTA's Open Data Program. In particular, the <a href = 'https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data'>"MTA Subway Hourly Ridership: Beginning February 2022"</a> was used.
-                        As the dataset was very large, python's requests library was used to communicate with the API and obtain data for one day: March 1st, 2023 (<a href = "preprocessing/data_fetch.py">python file</a>). The data was saved as a CSV. The CSV was then opened using pandas, reformatted so it would be easier to work with and saved in JSON format (<a href = "preprocessing/format_data.py">python file</a>). In particular, the resulting JSON object contains nested dictionaries of station and time.</p>
+    <p class="bodytext">Data used was published through the MTA's Open Data Program. In particular, the <a href = 'https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data'>"MTA Subway Hourly Ridership: Beginning February 2022"</a> was used. The preprocessing was a multi-step process:
+        <ol>
+            <li>As the dataset was very large, python's requests library was used to communicate with the API and obtain data for one day: March 1st, 2023 (<a href = "preprocessing/data_fetch.py">python file</a>).</li>
+            <li>The data was saved as a CSV.</li>
+            <li>The CSV was then opened using pandas</li>
+            <li>The CSV was reformatted so it would be easier to work with</li>
+            <li>The data was in JSON format (<a href = "preprocessing/format_data.py">python file</a>). In particular, the resulting JSON object contains nested dictionaries of station and time.</li>
+        </ol>               
 
 {% include "footer.html" %}
 

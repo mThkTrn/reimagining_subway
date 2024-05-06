@@ -8,11 +8,26 @@
 </head>
 <body>
 {% include "navbar.html" %}
-<h1>Borough Data: {{borough}}</h1>
-<h3>Lines Serving {{borough}}: {{" ".join(borough_data[borough]["lines"])}}</h3>
+<h1>{{borough}}</h1>
+<h5>Borough Profile</h5>
+<!-- <h3>Lines Serving {{borough}}: </h3> -->
 {% include "micro.html" %}
+
+{% if transit_bor %}
+
+
+
+<p class = "takeaway">The average time of turnstile swipes in {{borough}} is {% if very_transit_bor %} very {% endif %} early, so people usually commute out of this borough in the morning, meaning that this should be well connected with boroughs that people commute into. This is important data when designing a better subway system that priotizes commuters, as it demonstrates the role the lines play.</p>
+
+{% endif %}
+
+{% if not transit_bor %}
+
+<p class = "takeaway">The average time of turnstile swipes in {{borough}} is late, so people usually commute into this borough in the morning, meaning that this should be well connected with boroughs that people commute out of. This is important data when designing a better subway system that priotizes commuters, as it demonstrates the role the lines play.</p>
+
+{% endif %}
 <!-- <h2>Map</h2>
 {% include "micro2.html" %}
-{% include "footer.html" %} -->
+{% include "footer.html" %}
 </body>
 </html>
