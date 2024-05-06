@@ -14,16 +14,18 @@
 
     <h1>SubwAI: Reimagining the NYC Subway</h1>
 
-<div class="d_flex justify-content-around">
-<div>
+<div class="d_flex justify-content-around bg-primary">
+
+<div class = "bg-secondary w-25">
 <h5 class = "caption">NYC Subway stations by number of subway lines servicing station</h2>
     {% include "macro_lines.html" %}
 </div>
 
-<div>
+<div class = "bg-secondary w-25">
 <h5 class = "caption">NYC Subway stations by number of reduced fare morning commuters</h2>
     {% include "macro_fairfares.html" %}
 </div>
+
 </div>
 
 <p class = "takeaway">Areas most in need of the subway (with the most low income riders) have the least access to subway. This means that people in areas without direct train access often have to transfer from buses ontro trains.</p>
@@ -31,8 +33,8 @@
 <h5 class = "caption">NYC Subway stations by transfers from non-train modes of transportation</h5>
 {% include "macro_transfers.html" %}
 
-    <!-- <h2>Improved Subway Map</h2>
-    {% include "new_map.html" %} -->
+    <h2>Improved Subway Map</h2>
+    {% include "new_map.html" %}
 
 <h2>Takeaways</h2>
 
