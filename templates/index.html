@@ -12,30 +12,55 @@
     
     {% include "navbar.html" %}
 
+<div class = "wrapper">
+
+    <div class="jumbotron topthing">
+        <h1 class="display-4">SubwAI</h1>
+        <h3 class = "display-7">Reimagining the NYC Subway</h3>
+        <img src="images/subway_knot.png">
+        <p class="lead">The NYC Subway is broken. How can we fix it?</p>
+      </div>
+    
     <h1>SubwAI: Reimagining the NYC Subway</h1>
 
-<div class="d_flex justify-content-around bg-primary">
+<div class="diagram-cont">
 
-<div class = "bg-secondary w-25">
+<div class = "">
 <h5 class = "caption">NYC Subway stations by number of subway lines servicing station</h2>
     {% include "macro_lines.html" %}
 </div>
 
-<div class = "bg-secondary w-25">
+<div class = "">
 <h5 class = "caption">NYC Subway stations by number of reduced fare morning commuters</h2>
     {% include "macro_fairfares.html" %}
+</div>
+
+<div>
+    <h5 class = "caption">NYC Subway stations by transfers from non-train modes of transportation</h5>
+    {% include "macro_transfers.html" %}
 </div>
 
 </div>
 
 <p class = "takeaway">Areas most in need of the subway (with the most low income riders) have the least access to subway. This means that people in areas without direct train access often have to transfer from buses ontro trains.</p>
 
-<h5 class = "caption">NYC Subway stations by transfers from non-train modes of transportation</h5>
-{% include "macro_transfers.html" %}
 
-    <h2>Improved Subway Map</h2>
+
+<br><br>
+    <h2 class = "caption">Improved Subway Map</h2>
     {% include "new_map.html" %}
 
+    <p class = "takeaway">The above map features a more equitable design for the New York City Subway. Some simplifying assumptions were made (only 5 lines, and lines don't intersect). Every dot above corresponds to a location a line passes through. The map has obvious limitations, given the limited nature of the data, the non-intersecting lines and impracticality of its implementation, but it serves as a beginning for discussions on how we can improve out current subway system. The map was algorithmically generated using <a href = "new_map_create.ipynb">this script</a>, using the following procedure: </p>
+    <ol>
+        <li>The script defined a utility function that considered the value of adding a new line between any two stations, doing so by analyzing the time profiles of each station.</li>
+        <li>The script was instructed to keep the number of distinct lines in the current NYC subway (11)</li>
+        <li>The 11 stations with the least sub of pairwise utilities were identified as the beginning points of the 11 different lines</li>
+        <li>A greedy algorithm was employed, extending the lines until they encompass all stations in the New York Subway</li>
+    </ol>
+    <p class = "takeaway">Unlike the New York City subway, the above map features lines that heavily go through underserved areas, such as the red line which passes through the majority of Brooklyn, Queens and Harlem. This corroborates with the data above, which suggests that more lines should pass through those areas.</p>
+
+
+<br><br>
 <h2>Takeaways</h2>
 
 <ol>
@@ -44,5 +69,6 @@
     <li>In particular, more lines should be contructed to connect stations in outer boroughs, as to lessen the strain on stations with high bus-to-train transfers</li>
 </ol>
 {% include "footer.html" %}
+</div>
 </body>
 </html>

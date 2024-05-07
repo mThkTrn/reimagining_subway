@@ -7,6 +7,26 @@ img{
     width: 20vw
 }
 
-body{
+.wrapper{
     text-align: center;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
+.diagram-cont{
+    display: flex;
+    justify-content: space-around;
+    margin-left: -5vw;
+    width: 90vw;    
+}
+
+.caption{
+    font-size: 15px;
+}
+
+.takeaway{
+    font-size: 20px;
+}
+.topthing{
+    margin-top:7vh;
 }

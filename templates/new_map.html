@@ -1,6 +1,14 @@
 <svg width = "500px" height = "500px">
     {% include "svg_graphics/NYC_boroughs.svg" %}
-    {% for circle in transfers_list%}
-    <circle cx = "{{circle[0]}}" cy = "{{circle[1]}}" r = {{circle[2]}} fill = "rgba(255, 0, 0, 0.5)"/>
+    {% for line in new_lines_list%}
+    {% for circle in line %}
+    <circle cx = "{{circle[0]}}" cy = "{{circle[1]}}" r = "3" fill = "{{circle[2]}}"/>
+    {% endfor %}
+    {% endfor %}
+
+    {% for line in new_lines_list%}
+    {% for circle in line %}
+    <circle cx = "{{circle[0]}}" cy = "{{circle[1]}}" r = "3" fill = "{{circle[2]}}"/>
+    {% endfor %}
     {% endfor %}
 </svg>

@@ -62,6 +62,21 @@ def create_app(config=None):
     
     # [fairfare, transfer, lines]
     
+    new_lines = data["other_data"]["new_lines"]
+    #print(new_lines)
+    new_lines_list = []
+    colors = ["blue", "orange", "red", "lightgray", "yellow", "lime", "red", "green", "purple", "turquoise", "darkgray"]
+    for line in new_lines:
+        line_circles = []
+        for node in line:
+            # print(map_coords(nyc_svg_bottom_left, nyc_svg_top_right, (0,0), (500,500), (float(data["stations"][node]["latitude"]), float(data["stations"][node]["longitude"]))))
+            # print(colors[new_lines.index(line)])
+            line_circles.append(map_coords(nyc_svg_bottom_left, nyc_svg_top_right, (0,0), (500,500), (float(data["stations"][node]["latitude"]), float(data["stations"][node]["longitude"]))) + [colors[new_lines.index(line)]])
+        #print(line_circles)
+        new_lines_list.append(line_circles)
+    
+    #print(new_lines_list)
+    
     fairfare_circles_list = []
     transfer_circles_list = []
     lines_circles_list = []
@@ -90,7 +105,7 @@ def create_app(config=None):
     # Flask Blueprints: http://flask.pocoo.org/docs/latest/blueprints
     @app.route("/")
     def home():
-        return  flask.render_template("index.html", boroughs = boroughs, nyc_svg_bottom_left = nyc_svg_bottom_left, nyc_svg_top_right = nyc_svg_top_right, data = data, fairfare_circles_list = fairfare_circles_list, transfer_circles_list = transfer_circles_list, lines_circles_list = lines_circles_list)
+        return  flask.render_template("index.html", boroughs = boroughs, nyc_svg_bottom_left = nyc_svg_bottom_left, nyc_svg_top_right = nyc_svg_top_right, data = data, fairfare_circles_list = fairfare_circles_list, transfer_circles_list = transfer_circles_list, lines_circles_list = lines_circles_list, new_lines_list = new_lines_list)
     
     # @app.route("/index")
     # def index():
