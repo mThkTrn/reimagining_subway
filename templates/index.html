@@ -21,7 +21,6 @@
         <p class="lead">The NYC Subway is broken. How can we fix it?</p>
       </div>
     
-    <h1>SubwAI: Reimagining the NYC Subway</h1>
 
 <div class="diagram-cont">
 
@@ -50,14 +49,14 @@
     <h2 class = "caption">Improved Subway Map</h2>
     {% include "new_map.html" %}
 
-    <p class = "takeaway">The above map features a more equitable design for the New York City Subway. Some simplifying assumptions were made (only 5 lines, and lines don't intersect). Every dot above corresponds to a location a line passes through. The map has obvious limitations, given the limited nature of the data, the non-intersecting lines and impracticality of its implementation, but it serves as a beginning for discussions on how we can improve out current subway system. The map was algorithmically generated using <a href = "new_map_create.ipynb">this script</a>, using the following procedure: </p>
+    <p class = "takeaway">The above map features a more equitable design for the New York City Subway. Some simplifying assumptions were made (only 5 lines, and lines don't intersect). Every dot above corresponds to a location a line passes through. The map has obvious limitations, given the limited nature of the data, the non-intersecting lines and impracticality of its implementation, but it serves as a beginning for discussions on how we can improve out current subway system. The map was algorithmically generated using <a href = "preprocessing/new_map_create.ipynb">this script</a>, using the following procedure: </p>
     <ol>
         <li>The script defined a utility function that considered the value of adding a new line between any two stations, doing so by analyzing the time profiles of each station.</li>
         <li>The script was instructed to keep the number of distinct lines in the current NYC subway (11)</li>
         <li>The 11 stations with the least sub of pairwise utilities were identified as the beginning points of the 11 different lines</li>
         <li>A greedy algorithm was employed, extending the lines until they encompass all stations in the New York Subway</li>
     </ol>
-    <p class = "takeaway">Unlike the New York City subway, the above map features lines that heavily go through underserved areas, such as the red line which passes through the majority of Brooklyn, Queens and Harlem. This corroborates with the data above, which suggests that more lines should pass through those areas.</p>
+    <p class = "takeaway">Unlike the New York City subway, the above map features lines that heavily go through underserved areas, such as the orange and gray lines which passes through the majority of Brooklyn, Queens and Harlem. This corroborates with the data above, which suggests that more lines should pass through those areas.</p>
 
 
 <br><br>
