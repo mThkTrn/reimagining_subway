@@ -30,3 +30,9 @@ img{
 .topthing{
     margin-top:7vh;
 }
+ol{
+    text-align: left;
+}
+ul{
+    text-align: left;
+}
